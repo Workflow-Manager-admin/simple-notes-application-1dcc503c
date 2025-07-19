@@ -1,0 +1,335 @@
+/* Root variables for color palette */
+:root {
+  --primary: #1976d2;
+  --accent: #ffab00;
+  --secondary: #424242;
+  --bg: #fff;
+  --bg-secondary: #f8f9fa;
+  --text: #24292f;
+  --border: #e9ecef;
+  --sidebar-width: 220px;
+}
+
+/* Main wrapper layout */
+.notesapp-root {
+  min-height: 100vh;
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'system-ui', 'Segoe UI', Arial, sans-serif;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Header bar */
+.notesapp-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 56px;
+  padding: 0 1.5rem;
+  background: var(--primary);
+  color: #fff;
+  border-bottom: 1px solid var(--border);
+  gap: 1rem;
+}
+
+.notesapp-title {
+  font-size: 1.3rem;
+  font-weight: bold;
+  letter-spacing: 0.5px;
+  user-select: none;
+  outline: none;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.notesapp-search {
+  padding: 7px 12px;
+  border: none;
+  border-radius: 6px;
+  background: var(--bg-secondary);
+  color: var(--secondary);
+  font-size: 1em;
+  outline: none;
+  min-width: 120px;
+  transition: box-shadow 0.2s;
+}
+.notesapp-search:focus {
+  box-shadow: 0 0 0 2px var(--accent);
+}
+
+.notesapp-add-btn {
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-weight: bold;
+  padding: 7px 16px;
+  font-size: 1em;
+  cursor: pointer;
+  margin-left: 0.5rem;
+  box-shadow: 0 1px 2px rgba(31,41,55,.08);
+  transition: background 0.2s, transform 0.1s;
+}
+.notesapp-add-btn:hover, .notesapp-add-btn:focus {
+  background: #ffa000;
+  transform: translateY(-1px);
+}
+
+.sidebar-toggle {
+  margin-right: 12px;
+  display: none;
+  flex-direction: column;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 6px 3px;
+  gap: 3px;
+}
+.sidebar-toggle span {
+  width: 24px;
+  height: 3px;
+  background: #fff;
+  border-radius: 1.5px;
+  display: block;
+}
+
+/* Main layout */
+.notesapp-main {
+  flex: 1 1 0%;
+  display: flex;
+  min-height: 0;
+}
+.notesapp-sidebar {
+  width: var(--sidebar-width);
+  background: var(--bg-secondary);
+  border-right: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  transition: width 0.3s, min-width 0.3s;
+  min-width: 0;
+}
+.notesapp-sidebar:not(.open) {
+  width: 0;
+  min-width: 0;
+  overflow: hidden;
+  border-right: none;
+}
+
+.sidebar-header {
+  font-size: 1.1em;
+  font-weight: 600;
+  color: var(--secondary);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1rem 0.6rem 1rem;
+  border-bottom: 1px solid var(--border);
+  min-height: 48px;
+}
+
+.sidebar-notes-list {
+  list-style: none;
+  padding: 0.5rem 0;
+  margin: 0;
+  flex: 1 1 auto;
+  overflow-y: auto;
+}
+
+.sidebar-note {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  padding: 8px 18px 8px 1.3rem;
+  font-size: 1.05em;
+  color: var(--secondary);
+  border-left: 4px solid transparent;
+  background: transparent;
+  transition: background 0.13s, border-color 0.13s;
+}
+.sidebar-note.selected,
+.sidebar-note:focus,
+.sidebar-note[aria-current="true"] {
+  border-left: 4px solid var(--primary);
+  background: #e3f1fd;
+  color: var(--primary);
+  outline: none;
+}
+.sidebar-note:hover {
+  background: #f1f7fa;
+}
+.sidebar-note-title {
+  flex: 1 1 0%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-weight: 500;
+}
+.sidebar-delete {
+  color: var(--accent);
+  background: transparent;
+  border: none;
+  font-size: 1.14em;
+  margin-left: 0.5em;
+  cursor: pointer;
+  padding: 1px 6px;
+  border-radius: 3px;
+  line-height: 1;
+}
+.sidebar-delete:hover {
+  background: #ffe4a1;
+}
+.sidebar-empty {
+  display: block;
+  padding: 1rem 1.4rem;
+  color: #999;
+  font-size: 1em;
+}
+.notesapp-content {
+  flex: 1 1 0%;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  min-width: 0;
+  padding: 2.25rem 3rem 2rem 3rem;
+  background: var(--bg);
+}
+
+.note-editor {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  max-width: 650px;
+  margin: 0 auto;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 1px 6px rgba(20,30,69,.04);
+  padding: 2.2rem 2rem 1.7rem 2rem;
+  border: 1px solid var(--border);
+}
+
+.note-title-input {
+  font-size: 1.3em;
+  font-weight: 700;
+  color: var(--primary);
+  border: none;
+  background: transparent;
+  outline: none;
+  border-bottom: 2px solid transparent;
+  padding: 0.5em 0.1em;
+  margin-bottom: 0.3em;
+  transition: border-bottom 0.17s;
+}
+.note-title-input:focus {
+  border-bottom: 2px solid var(--primary);
+  background: #e7f2fe;
+}
+
+.note-content-input {
+  border: none;
+  border-radius: 7px;
+  background: var(--bg-secondary);
+  min-height: 120px;
+  font-size: 1em;
+  font-family: inherit;
+  padding: 0.95em 1em;
+  color: var(--secondary);
+  resize: vertical;
+  outline: none;
+  transition: box-shadow 0.18s;
+}
+.note-content-input:focus {
+  box-shadow: 0 0 0 2px var(--primary);
+  background: #f2f5f7;
+}
+
+.note-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+}
+
+.delete-btn {
+  background: var(--secondary);
+  color: #fff;
+  border: none;
+  padding: 0.42rem 1.25rem;
+  border-radius: 6px;
+  font-weight: 600;
+  margin-left: 0.3em;
+  cursor: pointer;
+  transition: background 0.16s;
+}
+.delete-btn:hover,
+.delete-btn:focus {
+  background: #222e3a;
+}
+
+.note-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 4rem 0 0 0;
+  color: #999;
+}
+.empty-message {
+  text-align: center;
+}
+.empty-message button {
+  margin-top: 1.2rem;
+}
+
+/* Responsive design */
+@media (max-width: 900px) {
+  .notesapp-content {
+    padding: 2rem 1rem 2rem 1rem;
+  }
+  .note-editor {
+    padding: 1.5rem 0.5rem 1.2rem 0.5rem;
+    max-width: 99vw;
+  }
+}
+@media (max-width: 650px) {
+  .notesapp-main {
+    flex-direction: column;
+  }
+  .notesapp-sidebar {
+    position: fixed;
+    top: 56px;
+    left: 0;
+    z-index: 12;
+    height: calc(100vh - 56px);
+    background: var(--bg-secondary);
+    width: 75vw !important;
+    max-width: 320px;
+    min-width: 185px;
+    border-top: none;
+    transition: transform 0.27s;
+    transform: translateX(-100%);
+    box-shadow: 2px 0 10px rgba(0,0,0,.09);
+    overflow-y: auto;
+  }
+  .notesapp-sidebar.open {
+    transform: translateX(0);
+  }
+  .notesapp-content {
+    padding: 1.12rem 6vw;
+  }
+  .sidebar-toggle {
+    display: flex;
+  }
+}
+@media (max-width: 500px) {
+  .note-editor {
+    padding: 0.6rem 2vw 0.75rem 3vw;
+    max-width: 99vw;
+  }
+  .notesapp-content {
+    padding: 0.7rem 2vw;
+  }
+}
